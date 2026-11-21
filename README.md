@@ -1,6 +1,6 @@
 # Academic Small Language Model (128-Token Micro-GPT Inference Engine)
 
-A transparent, **inference-only** Decoder-Only Transformer (GPT-style Small Language Model) with a **128-token vocabulary ($|V| = 128 > 100$)** implemented in pure Python and NumPy for academic and instructional demonstration.
+A transparent, **inference-only** Decoder-Only Transformer (GPT-style Small Language Model) with a **128-token vocabulary ($|V|)** implemented in pure Python and NumPy for academic and instructional demonstration.
 
 ---
 
@@ -8,7 +8,7 @@ A transparent, **inference-only** Decoder-Only Transformer (GPT-style Small Lang
 
 1. **Strictly Inference-Only (No Training Loop)**:
    - Operates exclusively on a **known, deterministic set of 6,888 parameters** stored in [`parameters.json`](parameters.json) and analytically constructed in [`parameter_source.py`](parameter_source.py).
-   - Zero backpropagation, zero optimizers, and zero opaque binary checkpoints.
+   - No learning phase. Only inference. Zero backpropagation, zero optimizers, and zero opaque binary checkpoints.
 2. **128-Token Vocabulary Across 8 Syntactic Categories & 5 Knowledge Domains**:
    - Covers `Control & Punctuation` (`4`), `Determiners` (`8`), `Adjectives` (`20`), `Subject Nouns` (`28`), `Verbs` (`24`), `Prepositions` (`12`), `Object Nouns` (`24`), and `Adverbs` (`8`) spanning **Physical/Nature**, **Academic/Scholarship**, **AI/Computing**, **Medicine/Biology**, and **Astronomy/Space**.
 3. **Complete Parameter Source & Provenance (`d_model = 16`, `H = 4`, `d_ff = 40`)**:
@@ -17,7 +17,8 @@ A transparent, **inference-only** Decoder-Only Transformer (GPT-style Small Lang
    - Captures all 8 mathematical stages of the Transformer forward pass inside a [`ForwardPassTrace`](slm_inference.py) structure and visualizes intermediate vectors, LayerNorm sphere projections, 4-Head Causal Self-Attention masks and heatmaps, 40 FFN Key-Value memory neuron activations, and 128-token unembedding logits.
 5. **Autoregressive Next-Token Prediction & Token String Growth**:
    - Demonstrates step-by-step how the final position's 16D hidden state predicts a probability distribution over all 128 vocabulary tokens, selects the next token (via Greedy, Temperature, or Top-$k$ decoding), and **appends the predicted token to the running token sequence** until `<EOS>`.
-
+6. **Understand hallucination comes from a random sampler inside the code and not because language models are getting sentient.**:
+   - We can change the temperate parameters to see how it affects the sequence of output token in each stage. Temperature controls the randomness of the output. Higher the temperature, more random the output. Lower the temperature, more deterministic the output. 
 ---
 
 ## 2. Architecture & Mathematical Pipeline (`|V| = 128, d_model = 16`)
