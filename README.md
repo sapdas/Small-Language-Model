@@ -1,6 +1,6 @@
 # Academic Small Language Model (128-Token Micro-GPT Inference Engine)
 
-A transparent, **inference-only** Decoder-Only Transformer (GPT-style Small Language Model) with a **128-token vocabulary ($|V|)** implemented in pure Python and NumPy for academic and instructional demonstration.
+A transparent, **inference-only** Decoder-Only Transformer (GPT-style Small Language Model) with a **128-token vocabulary (|V|)** implemented in pure Python and NumPy for academic and instructional demonstration.
 
 ---
 
